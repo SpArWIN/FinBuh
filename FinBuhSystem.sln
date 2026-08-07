@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FinBuh", "FinBuh", "{03DD016F-E6F6-49BC-9704-1A82C42FFF31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinBuh.Common.Contracts", "FinBuh\FinBuh.Common.Contracts\FinBuh.Common.Contracts.csproj", "{4E6018E3-D90E-49CC-8127-AA68D14CE983}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FinBuh.Api", "FinBuh.Api", "{71686585-C6F1-406B-9A9F-CA916AF0DD0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinBuh.ApiSystem", "FinBuh.Api\FinBuh.ApiSystem\FinBuh.ApiSystem.csproj", "{2A3E2593-A538-43A9-8D09-05695DC6BD00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4E6018E3-D90E-49CC-8127-AA68D14CE983} = {03DD016F-E6F6-49BC-9704-1A82C42FFF31}
+		{2A3E2593-A538-43A9-8D09-05695DC6BD00} = {71686585-C6F1-406B-9A9F-CA916AF0DD0D}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E6018E3-D90E-49CC-8127-AA68D14CE983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E6018E3-D90E-49CC-8127-AA68D14CE983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E6018E3-D90E-49CC-8127-AA68D14CE983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E6018E3-D90E-49CC-8127-AA68D14CE983}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A3E2593-A538-43A9-8D09-05695DC6BD00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A3E2593-A538-43A9-8D09-05695DC6BD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A3E2593-A538-43A9-8D09-05695DC6BD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A3E2593-A538-43A9-8D09-05695DC6BD00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
