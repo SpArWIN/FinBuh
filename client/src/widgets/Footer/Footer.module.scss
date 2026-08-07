@@ -1,0 +1,36 @@
+.footer {
+  padding: 28px 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  color: var(--color-muted);
+
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+  text-decoration: none;
+  letter-spacing: -0.04em;
+
+  span {
+    color: var(--color-accent);
+  }
+}
+
+@media (max-width: 680px) {
+  .inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

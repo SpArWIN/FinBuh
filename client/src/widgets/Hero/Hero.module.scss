@@ -1,0 +1,158 @@
+.hero {
+  padding: 72px 0 48px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.content {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  color: var(--color-accent);
+  font-weight: 800;
+}
+
+h1 {
+  max-width: 790px;
+  margin: 0;
+  color: var(--color-primary-dark);
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.description {
+  max-width: 650px;
+  margin: 26px 0 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 44px;
+}
+
+.stat {
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.72);
+
+  strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-primary-dark);
+    font-size: 20px;
+  }
+
+  span {
+    color: var(--color-muted);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  padding: 32px;
+  border-radius: var(--radius-xl);
+  color: #ffffff;
+  background:
+          linear-gradient(145deg, rgba(47, 158, 117, 0.9), transparent 65%),
+          var(--color-primary-dark);
+  box-shadow: var(--shadow-card);
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: -80px;
+    bottom: -80px;
+    width: 220px;
+    height: 220px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  h2 {
+    position: relative;
+    z-index: 1;
+    margin: 34px 0 24px;
+    font-size: 30px;
+    line-height: 1.16;
+    letter-spacing: -0.04em;
+  }
+
+  ul {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.cardHeader {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.78);
+
+  span {
+    font-weight: 900;
+    color: #ffffff;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 920px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-top: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 24px;
+  }
+}

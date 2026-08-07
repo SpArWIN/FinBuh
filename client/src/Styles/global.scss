@@ -1,0 +1,15 @@
+@use './reset.scss';
+@use './theme.scss';
+
+body {
+  font-family: var(--font-main), serif;
+  color: var(--color-text);
+  background:
+          radial-gradient(circle at top left, rgba(47, 158, 117, 0.12), transparent 34rem),
+          var(--color-bg);
+}
+
+::selection {
+  color: #ffffff;
+  background: var(--color-accent);
+}
