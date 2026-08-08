@@ -1,12 +1,11 @@
-import  {
+import {
     type AnchorHTMLAttributes,
     type ButtonHTMLAttributes,
     type PropsWithChildren
 } from 'react';
 
 import styles from './Button.module.scss';
-import {classNames} from "../../Lib/classNames.ts";
-
+import { classNames } from "../../Lib/classNames.ts";
 
 type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 
@@ -26,6 +25,10 @@ type ButtonAsLinkProps = BaseProps &
 
 type ButtonProps = PropsWithChildren<ButtonAsButtonProps | ButtonAsLinkProps>;
 
+function isLinkProps(props: ButtonProps): props is PropsWithChildren<ButtonAsLinkProps> {
+    return 'href' in props && props.href !== undefined;
+}
+
 export function Button({
                            children,
                            variant = 'primary',
@@ -38,7 +41,8 @@ export function Button({
         className,
     );
 
-    if ('href' in props && props.href) {
+    // Если это ссылка, TS внутри этого блока будет видеть ТОЛЬКО свойства ссылки
+    if (isLinkProps(props)) {
         return (
             <a className={buttonClassName} {...props}>
                 {children}
@@ -46,9 +50,17 @@ export function Button({
         );
     }
 
-    // @ts-ignore
+    const {
+        type = 'button',
+        ...buttonProps
+    } = props as ButtonAsButtonProps;
+
     return (
-        <button className={buttonClassName} {...props}>
+        <button
+            className={buttonClassName}
+            type={type}
+            {...buttonProps}
+        >
             {children}
         </button>
     );
