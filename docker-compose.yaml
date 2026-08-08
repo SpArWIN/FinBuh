@@ -1,0 +1,51 @@
+﻿name: finbuh-system
+
+services:
+  npm:
+    image: jc21/nginx-proxy-manager:2.15.1
+    container_name: finbuh_npm
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    environment:
+      TZ: Europe/Moscow
+      DISABLE_IPV6: "true"
+    volumes:
+      - ./infra/nginx-proxy-manager/data:/data
+      - ./infra/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+    networks:
+      - finbuh_network
+
+  api:
+    build:
+      context: .
+      dockerfile: FinBuh.Api/FinBuh.ApiSystem/Dockerfile
+    container_name: finbuh_api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+    expose:
+      - "8080"
+    networks:
+      - finbuh_network
+
+  web:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: finbuh_web
+    restart: unless-stopped
+    depends_on:
+      - api
+    expose:
+      - "80"
+    networks:
+      - finbuh_network
+
+networks:
+  finbuh_network:
+    name: finbuh_network
