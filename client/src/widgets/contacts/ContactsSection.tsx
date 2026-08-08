@@ -19,7 +19,7 @@ export function ContactsSection() {
                         </p>
 
                         <div className={styles.contacts}>
-                            <a href="tel:+79999999999">
+                            <a href="tel:++79997359842">
                                 <span>Телефон</span>
                                 +7 999 999-99-99
                             </a>
