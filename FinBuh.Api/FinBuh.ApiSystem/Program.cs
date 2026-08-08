@@ -38,6 +38,37 @@ builder.Services.AddCors(options =>
     });
 });
 var app = builder.Build();
+
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        var logger = context.RequestServices
+            .GetRequiredService<ILoggerFactory>()
+            .CreateLogger("GlobalExceptionHandler");
+
+        var exceptionFeature = context.Features
+            .Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>();
+
+        if (exceptionFeature?.Error is not null)
+        {
+            logger.LogError(
+                exceptionFeature.Error,
+                "Unhandled exception while processing {Method} {Path}",
+                context.Request.Method,
+                context.Request.Path);
+        }
+
+        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        context.Response.ContentType = "application/json";
+
+        await context.Response.WriteAsJsonAsync(new
+        {
+            code = "internal_error",
+            message = "Внутренняя ошибка сервера."
+        });
+    });
+});
 app.UseCors("Frontend");
 app.MapGet("/health", () => Results.Ok(new
 {
