@@ -1,5 +1,4 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
-USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 
@@ -15,9 +14,13 @@ RUN dotnet restore "FinBuh.Api/FinBuh.ApiSystem/FinBuh.ApiSystem.csproj"
 COPY . .
 
 WORKDIR "/src/FinBuh.Api/FinBuh.ApiSystem"
-RUN dotnet publish "FinBuh.ApiSystem.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "FinBuh.ApiSystem.csproj" \
+    -c $BUILD_CONFIGURATION \
+    -o /app/publish \
+    /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build /app/publish .
+ENV ASPNETCORE_URLS=http://+:8080
 ENTRYPOINT ["dotnet", "FinBuh.ApiSystem.dll"]
