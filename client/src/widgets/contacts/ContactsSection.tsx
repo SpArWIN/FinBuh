@@ -19,14 +19,14 @@ export function ContactsSection() {
                         </p>
 
                         <div className={styles.contacts}>
-                            <a href="tel:++79997359842">
+                            <a href="tel:+79997359842">
                                 <span>Телефон</span>
-                                +7 999 999-99-99
+                                +7 79997359842
                             </a>
 
-                            <a href="mailto:info@finbuh.ru">
+                            <a href="mailto:info@finbuhsystem.ru">
                                 <span>Email</span>
-                                info@finbuh.ru
+                                info@finbuhsystem.ru
                             </a>
                         </div>
                     </div>
