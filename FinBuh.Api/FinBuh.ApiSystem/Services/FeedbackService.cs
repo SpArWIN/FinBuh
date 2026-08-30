@@ -11,12 +11,14 @@ public class FeedbackService : IFeedbackService
 {
     private readonly IEmailSender _emailSender;
     private readonly FeedbackOptions _feedbackOptions;
+    private readonly ILogger<FeedbackService> _logger;
     
-    
+
     public FeedbackService(IEmailSender emailSender,
-        IOptions<FeedbackOptions> feedbackOptions)
+        IOptions<FeedbackOptions> feedbackOptions, ILogger<FeedbackService> logger)
     {
         _emailSender = emailSender;
+        _logger = logger;
         _feedbackOptions = feedbackOptions.Value;
     }
     
@@ -24,6 +26,7 @@ public class FeedbackService : IFeedbackService
     {
         if (IsBot(request))
         {
+            _logger.LogInformation("Feedback request ignored by honeypot.");
             return Result.Success();
         }
         var name = Normalize(request.Name);
@@ -34,6 +37,12 @@ public class FeedbackService : IFeedbackService
 
         if (!validationResult.IsSuccess)
         {
+            _logger.LogWarning(
+                "Feedback validation failed. Code: {Code}. Message: {Message}. Contact: {Contact}",
+                validationResult.Error?.Code,
+                validationResult.Error?.Message,
+                contact);
+
             return validationResult;
         }
         
@@ -49,10 +58,23 @@ public class FeedbackService : IFeedbackService
                 textBody,
                 htmlBody,
                 cancellationToken);
+            _logger.LogInformation(
+                "Feedback email sent successfully. Name: {Name}, Contact: {Contact}, ReceiverEmail: {ReceiverEmail}",
+                name,
+                contact,
+                _feedbackOptions.ReceiverEmail);
+            
             return Result.Success();
         }
-        catch (Exception)
+        catch (Exception exception)
         {
+            _logger.LogError(
+                exception,
+                "Failed to send feedback email. Name: {Name}, Contact: {Contact}, ReceiverEmail: {ReceiverEmail}",
+                name,
+                contact,
+                _feedbackOptions.ReceiverEmail);
+            
             return Result.Failure(
                 ErrorCodes.EmailSendFailed,
                 "Не удалось отправить заявку. Попробуйте позже или свяжитесь напрямую.",
